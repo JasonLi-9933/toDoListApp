@@ -1,0 +1,26 @@
+<!-- base HTML template for list -->
+
+<%- include("header") -%>
+<div class="box" id="heading">
+    <h1><%= title %> </h1>
+</div>
+
+<div class="box">
+    <% for( let i = 0; i < newItemList.length; i++ ) { %>
+    <form action='/delete' method='post'>
+        <div class="item">
+            <input type="checkbox" onChange="this.form.submit()" name="checkbox" value=<%= newItemList[i]._id %> >
+            <p><%= newItemList[i].name %> </p>
+        </div>
+        <input type="hidden" name="listName" value="<%= title %>"></input>
+    </form>
+    <% } %>
+
+    <form action="/" method="post" class="item">
+        <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+        <button type="submit" name="listName" value="<%= title %>">+</button>
+    </form>
+</div>
+
+
+<%- include("footer") -%>
