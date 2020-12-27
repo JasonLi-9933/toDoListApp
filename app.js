@@ -2,10 +2,8 @@
 
 const express = require('express');
 const app = express();
-const http = require('http');
 const path = require("path");
 const bodyParser = require('body-parser');
-const server = http.createServer(app);
 const mongoose = require('mongoose');
 const ItemModel = require("./schema/ItemSchema").ItemModel;
 const ListModel = require("./schema/ListSchema");
