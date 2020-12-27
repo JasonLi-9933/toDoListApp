@@ -2,11 +2,15 @@
 
 const express = require('express');
 const app = express();
+const http = require('http');
 const path = require("path");
 const bodyParser = require('body-parser');
+const server = http.createServer(app);
 const mongoose = require('mongoose');
 const ItemModel = require("./schema/ItemSchema").ItemModel;
 const ListModel = require("./schema/ListSchema");
+const _ = require('lodash');
+const port = process.env.PORT || 3000;
 
 // app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -133,7 +137,7 @@ app.post("/delete", (req, res) => {
 });
 
 app.get("/:customListName", (req, res) => {
-    let customListName = req.params.customListName;
+    let customListName = _.capitalize(req.params.customListName);
     // let customList;
     ListModel.findOne({
         name: customListName
@@ -158,6 +162,6 @@ app.get("/:customListName", (req, res) => {
     });
 });
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log("Server is running on port 3000!");
 });
